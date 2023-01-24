@@ -3,6 +3,7 @@
 % \cite{weiss} pentru cartea din care citim
 % \cite{prakken} este referința [36]
 % \cite{aif} este referinta [11] (Towards an Argument Interchange Format)
+% \cite{modgil} este referința [30]
 
 \title{Argumentation among Agents:\\Review and Commentary}
 \author{Grigore Costin-Teodor\quad Radu Ștefan-Octavian\\Vasiliu Florin\quad Vintilă Eduard}
@@ -12,11 +13,24 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 
+\usepackage{amsfonts}
+\usepackage{hyperref}
+
+% Utilizează biblatex pentru referințe bibliografice
+\usepackage[
+maxbibnames=50,
+sorting=nty
+]{biblatex}
+
+% Fișierul cu bibliografia
+\addbibresource{bibliography.bib}
+
 \usepackage{mathtools} % pentru sageti cu scris peste
 
 \newcommand{\df}{\ensuremath{\rightharpoonup}}
 \newtheorem{Def}{Definition}[subsection]
 \newtheorem{Ex}{Example}[subsection]
+\newtheorem{Claim}{Claim}
 
 
 \begin{document}
@@ -129,13 +143,71 @@ An argument $p$ is:
 \end{itemize}
 \end{Def}
 
-% The above work is Florin's
+\newpage
+% ===================================================
 
+
+
+% =================Edi's work========================
+\section{Argumentation Protocols}
+In the previous section, we have presented two possible models for formalizing the idea of argumentation: Prakken's framework and Dung's model. We find that both of them manage to  capture the intuition behind the essence of an argument reasonably well. However, we shall see that the author focuses on the latter model to present a mechanism by which two agents can participate in a \emph{dispute} where they can state and attack each other's arguments, much as in a real world debate.
+
+As such, this section focuses on formalizing these "argumentation games" and also a set of constraints used in regulating the whole argumentation process in order to prevent situations where an agent might contradict himself, for example. These rules are called argumentation protocols and Dung's model proves to be particularly effective for them, since we do not have to deal with the internal structure of the arguments.
+
+\subsection{Argumentation Games}
+We begin by fixing the environment in which the argumentation process takes place. Essentially, we want to model a game where one player proposes an initial argument, after which both players take turns in counter-attacking the counterpart's last argument by specifying one which defeats it. The game shall be considered to be won by the player who lastly moved an argument which could not be defeated by its opponent.
+
+The author refers to Modgil and Caminada's work \cite{modgil} for describing such a game, where the two players are defined as PRO (as in, the proponent which states the initial argument) and OPP (the opponent, which begins by counter-attacking the argument proposed by PRO). We provide the following formal definition of what represents a "dispute", a notion which captures the moves done by the players to attack the counterpart's arguments and is merely stated in natural language by the author:
+
+\begin{Def}[dispute]
+	Given an argumentation framework $(\mathcal{A}, \df)$, a dispute is a sequence $(a_{k})_{k \in \mathbb{N}}$ (possibly infinite) of arguments from $\mathcal{A}$ where the following property holds: $\forall i \in \mathbb{N^*},  a_{i} \df a_{i-1}$ (i.e. every argument in the sequence defeats its preceding argument).
+\end{Def}
+
+From the above definition, we can thus consider that even indexed elements in the sequence (starting from $a_0$) are the arguments stated by the PRO player, and the odd ones by the OPP player. We can additionally define what it means to win a dispute:
+
+\begin{Def}[winning of a dispute]
+	A finite dispute $d = (a_{k})_{k=0}^{n}$, where $n \in \mathbb{N}$ is the index of the last argument in $d$, is said to be won by the PRO player iff $n$ is even and no argument from $\mathcal{A}$ can defeat $a_n$. Consequently, the dispute $d$ is considered to be won by the OPP player iff $n$ is odd and no argument from $\mathcal{A}$ can defeat $a_n$ .
+\end{Def}
+
+This corresponds to the the established semantics by which a player wins only if its counterpart player cannot defeat the last argument that has been stated. Notice how the sequence of arguments must be finite in order to establish a winner - if the sequence would have been infinite, hence unbounded, we could not pronounce a winner since there would not exist a last argument in the dispute.
+
+We observe that a player could potentially counter-attack its counterpart player with any argument whatsoever that defeats the last move. This leads to multiple disputes based on the defeating argument chosen by the player, which can be conveniently modeled as a dispute tree, as shown by the author. Such a tree can be constructed with the initial argument stated by the PRO player as a root node and child nodes as arguments which defeat the parent node. As such, all paths from root to leaf will represent all possible disputes for a given starting argument. We propose the following definition for a dispute tree, inspired by \cite{modgil}:
+
+\begin{Def}[dispute trees]
+	Given an argumentation framework\\ $(\mathcal{A}, \df)$ and an argument $p$ in $\mathcal{A}$, a dispute tree induced by $p$ is a tree $T$ rooted in $p$, where each node represents an argument from $\mathcal{A}$ and for all arguments $x, y$ in $\mathcal{A}$, $x$ is a child of $y$ in $T$ iff $x$ defeats $y$.
+\end{Def}
+
+Notice how each level of a dispute tree corresponds to arguments stated by either the PRO or the OPP player. If we count the levels of the tree starting from 0, then each even-numbered level marks arguments moved by the PRO player, and consequently odd-numbered levels represent arguments from the OPP player. As such, we can now consider a \emph{dispute} merely a path in such a tree, and we shall see that further definitions and theorems stated by the author use this assumption.
+
+
+However, since we have seen that disputes can potentially represent infinite sequences of arguments, this can lead, of course, to never-ending paths in a dispute tree where we cannot therefore pronounce a winner. Fortunately, we can avoid such situations by imposing a set of constraints by which a player cannot simply choose any argument that defeats its opponent's. One possible rule could describe that a player cannot state an argument which defeats any of its previous arguments in the dispute, for example (in other words, the set of arguments uttered by the player is \emph{conflict-free}). By imposing such rules, we can capture various semantics of an argumentation game, such as a player cannot contradict himself, as is the case with the example rule that we have given. This is exactly the intuition behind an argumentation protocol, a notion which the author uses to introduce constraints that no longer allow infinite decision trees, through the definition of a protocol called $G$.
+
+\begin{Def}[dispute tree under protocol G]\label{protG}
+	Given a dispute tree $T$, we consider $T$ to be under protocol G iff for any arbitrary dispute $d$ in $T$ and for any pair of arguments $x$, $y$ stated by PRO in $d$, $x$ is different than $y$.
+\end{Def}
+
+A dispute tree $T$ under a protocol $G$ essentially ensures that PRO does not state an argument which has been previously uttered by him. It is claimed by the author that the following holds:
+
+\begin{Claim}
+	If $T$ is a dispute tree under protocol $G$, then $T$ is finite.
+\end{Claim}
+
+
+\noindent\textbf{Proof of claim}\quad Let $T$ be a dispute tree under protocol G, induced by an argument $p$ from an argumentation framework $(\mathcal{A}, \df)$, where $\mathcal{A}$ is a finite set of arguments with $n \in \mathbb{N^*}$ such that $card(\mathcal{A}) = n$. Let $d = (a_{k})_{k \in \mathbb{N}}$ be a dispute in $T$ of length of at least $2n - 1$ arguments (we do not consider the other disputes, since we know they are of finite length).
+
+%, and $m \in\mathbb{N}$ such that $m = 2n - 1$
+We shall prove that $d$ is of finite length; more specifically, exactly of length $2n$. We consider the argument $a_{2n - 1}$ from our sequence $d$. Without loss of generality, we establish $PRO_{2n-1}(d) = (a_{2k})_{k=0}^{n-1}$ to be the arguments uttered by PRO until argument $a_{2n - 1}$ (stated by OPP) from dispute $d$. By definition \ref{protG}, we have that each argument in $PRO_{2n-1}(d)$ is pairwise different with all other arguments in it, hence all elements in its sequence are unique. Since $PRO_{2n-1}(d)$ is of length $n = card(\mathcal{A})$, every argument from $\mathcal{A}$ is found in this sequence. Now, assume that there exists an argument $a_{2n}$ in dispute $d$. Since we have shown that all previous arguments uttered by PRO cover all the elements in $\mathcal{A}$, $a_{2n}$ therefore must be identical to an argument already stated beforehand. This obviously contradicts the definition \ref{protG} for a dispute tree under the protocol $G$. As such, we have shown that $a_{2n}$ doesn't exist, hence the sequence $d$ ends at the $a_{2n-1}$ argument, which means that $d$ is of finite length $2n$.
+
+Consequently, since no path (dispute) in $T$ is of infinite length, this leads us to the conclusion that, indeed, $T$ is of finite length.
+% ===================================================
+
+
+	% ==============Costinteo's work=====================
 \section{The Argument Interchange Format}
 In the previous sections, we have elaborated on the semantics of arguments, the argumentation protocols, as well as the application of game theory in strategic argumentation. However, there has been no mention of a universal way of sharing the data underlying the arguments. This problem is especially evident in the practical implementations of such argumentation systems. Therefore, a community-led effort has laid down the foundations of a common, standardized specification for representing arguments and sharing integral data to their unfolding, called the \emph{Argumentation Interchange Format (AIF)} \cite{aif}.
 
 \subsection{Motivation for the AIF}
-The author of the initial work we are reviewing references the article that has created the first draft for the AIF, but does not enter into many details. We would like to note the more detailed reasons that led to the decision of creating this format, as specified in \cite{aif}. 
+The author of the initial work we are reviewing references the article that has created the first draft for the AIF, but does not enter into many details. We would like to note the more detailed reasons that led to the decision of creating this format, as specified in \cite{aif}.
 
 Previously, there has been a variety of attempts at creating an argument mark-up language, but they were designed to be used with specific tools in mind. This led to languages that are too strongly linked with the internal workings of such tools and fail to provide the necessary abstraction and freedom to exchange arguments for different kinds of systems. In addition, such early works towards a mark-up language have been aimed at developing an intuitive user experience, accommodating the construction of natural language arguments. Thus, they neglected formal logic and were therefore unsuitable for various multi-agent systems.
 
@@ -200,7 +272,7 @@ We label the premises in order, as $P_1, P_2$, and the conclusion, as $C_1$. We 
     \item[($P_2$)] if \emph{Vitamin D}, then \emph{good health}
     \item[($C_1$)] if \emph{sun's UV}, then \emph{good health}
 \end{itemize}
-Therefore, we can construct a simple argument $A_1$, as per Definition \ref{defsarg}. 
+Therefore, we can construct a simple argument $A_1$, as per Definition \ref{defsarg}.
 \begin{Ex}[simple argument in natural language]
 \sloppy The tuple $A_1 = \langle \lbrace P_1, P_2 \rbrace, HS_1, C_1\rangle$ is a simple argument in natural language, where $P_1, P_2 \in \mathcal{N}_I$ are I-nodes representing premises and $C_1 \in \mathcal{N}_I$ is an I-node representing the conclusion. $HS_1 \in \mathcal{N}_S^{RA}$ is a rule of inference application node (RA-node), that uses the hypothetical syllogism scheme from propositional logic.
 \end{Ex}
@@ -275,6 +347,9 @@ After labelling this argument's premises with $P_3, P_4$ and its conclusion as $
 \end{figure}
 
 \section{Conclusion}
-Lorem ipsum to be done I am metaphorically dying
+Lorem ipsum to be done I am metaphorically dying \tiny{hang in there!!}
+% ===================================================
+
+\printbibliography[heading=bibintoc]
 \end{document}
 
