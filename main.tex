@@ -146,8 +146,6 @@ An argument $p$ is:
 \newpage
 % ===================================================
 
-
-
 % =================Edi's work========================
 \section{Argumentation Protocols}
 In the previous section, we have presented two possible models for formalizing the idea of argumentation: Prakken's framework and Dung's model. We find that both of them manage to  capture the intuition behind the essence of an argument reasonably well. However, we shall see that the author focuses on the latter model to present a mechanism by which two agents can participate in a \emph{dispute} where they can state and attack each other's arguments, much as in a real world debate.
@@ -199,10 +197,66 @@ A dispute tree $T$ under a protocol $G$ essentially ensures that PRO does not st
 We shall prove that $d$ is of finite length; more specifically, exactly of length $2n$. We consider the argument $a_{2n - 1}$ from our sequence $d$. Without loss of generality, we establish $PRO_{2n-1}(d) = (a_{2k})_{k=0}^{n-1}$ to be the arguments uttered by PRO until argument $a_{2n - 1}$ (stated by OPP) from dispute $d$. By definition \ref{protG}, we have that each argument in $PRO_{2n-1}(d)$ is pairwise different with all other arguments in it, hence all elements in its sequence are unique. Since $PRO_{2n-1}(d)$ is of length $n = card(\mathcal{A})$, every argument from $\mathcal{A}$ is found in this sequence. Now, assume that there exists an argument $a_{2n}$ in dispute $d$. Since we have shown that all previous arguments uttered by PRO cover all the elements in $\mathcal{A}$, $a_{2n}$ therefore must be identical to an argument already stated beforehand. This obviously contradicts the definition \ref{protG} for a dispute tree under the protocol $G$. As such, we have shown that $a_{2n}$ doesn't exist, hence the sequence $d$ ends at the $a_{2n-1}$ argument, which means that $d$ is of finite length $2n$.
 
 Consequently, since no path (dispute) in $T$ is of infinite length, this leads us to the conclusion that, indeed, $T$ is of finite length.
-% ===================================================
 
+% ======================================================
 
-	% ==============Costinteo's work=====================
+% =================Stefan's work========================
+
+\newpage
+
+\section{Strategic Argumentation \& Game Theory}
+
+What we've seen until now is an array of different argumentation protocols,
+which describe how an agent can move in different situations, by giving a set
+of possible moves. Variations among protocols can be ovserved. Some are
+``expremely prescriptive'', only allowing agents to make a move at a time,
+while others such as the \emph{persuation protocol} proposed by Prakken allows
+agents multiple choices. The behaviour of agents is called a \emph{strategy}
+and it influences both the outcome (e.g. the winner) and the dynamics (e.g. the
+pace) of the dialog.
+
+Researchers started exploring different types of strategies that agents could
+use in order to chose their arguments and some of them came up with heuristic
+systems based on which agents evaluate or assert arguments.
+
+Parsons et al. \cite{parson} developed a dialogue system, part of which they
+defined so called \emph{agent attitudes}: such as \emph{confident} (asserts all
+propositions for which he can construct an argument), \emph{careful} (same as
+confident, but with the further restriction of not finding a stronger
+counterargument than the one found), \emph{thoughtful} (asserts only
+propositions for which he finds acceptable arguments), etc. Other researchers
+have though of using social constructs (rights and obligations) \cite{21}, or
+mental state of agents (beliefs, desires, intentions) \cite{22}.
+
+The problem of the heuristic approach to designing argumentation strategies is
+that they only provide a subset of all possible strategies. It's been
+determined that an appropriate framework for doing a comprehensive study of 
+\textbf{strategic argumentation} is provided by \emph{game theory} (von Neuman and 
+Morgenstern \cite{55}). 
+
+%We can thus model a strategic argumentation scenario
+%as a game where the players are the agents argumenting, and the set of actions
+%available to them is the set of argumentative moves (eg. asserting or challenging
+%a claim). The outcome rule is 
+
+Game theory can be used in the case of strategic argumentation in two main ways:
+\begin{enumerate}
+    \item a thorough analysis of the strategic scenario can be tackled,
+        focusing on predicting the outcome of the game; an agent can use this
+        analysis to choose the best strategy for his exact scenario
+    \item design rules for the game (here, \emph{argumentation protocol}) in
+        such a way that the behaviour of the agents follows a desired path
+        (e.g. promoting ``good'' argumentative behaviour); this is called
+        \emph{mechanism design} and will be further described in a following
+        section.
+\end{enumerate}
+
+% ======================================================
+
+% ==============Costinteo's work=====================
+
+\newpage
+
 \section{The Argument Interchange Format}
 In the previous sections, we have elaborated on the semantics of arguments, the argumentation protocols, as well as the application of game theory in strategic argumentation. However, there has been no mention of a universal way of sharing the data underlying the arguments. This problem is especially evident in the practical implementations of such argumentation systems. Therefore, a community-led effort has laid down the foundations of a common, standardized specification for representing arguments and sharing integral data to their unfolding, called the \emph{Argumentation Interchange Format (AIF)} \cite{aif}.
 
