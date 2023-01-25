@@ -251,6 +251,58 @@ Game theory can be used in the case of strategic argumentation in two main ways:
         section.
 \end{enumerate}
 
+\subsection{Glazer and Rubenstein's Model}
+
+Glazer and Rubenstein were among the first to use \emph{game theory} in the
+analysis of argumentation \cite{17}. They used mechanism design in an attempt
+to create rules of debate such that a listener can arrive to the right
+conclusion when listening to arguments from two debaters. They described a
+minimal word state depicted by a vector $\omega=(w_1, w_2, \dots, w_5)$ where
+each $w_i$ is called an ``aspect'' and has values in the set ${1, 2}$. If
+$w_i=1$ then $w_i$ supports outcome $O_1$. If $w_i=2$, then it supports outcome
+$O_2$. They model this setup as an extensive game, then consider different
+combinations of \emph{procedrual rules} (which determine the order and type of
+arguments each debater is allowed to state) and \emph{persuasion rules} (which
+determine how the listener determines the outcome). Since the \emph{persuation
+rules} are chosen arbitrarily, there cannot be determined a rigorous
+correlation between the meaning of the arguments and the conclusion of 
+the judge.
+
+%\begin{enumerate}
+    %\item \emph{procedural rules} -- about the order and type of arguments each
+        %debatee is allowed to state \begin{itemize}
+        %\item \emph{one-speaker debate} -- two arguments are revealed at once by
+            %one debatee
+        %\item \emph{simultaneous debate} -- the two debatees simultanously each
+            %reveal one argument
+        %\item \emph{sequential debate} -- debatees take turns, each revealing one
+            %argument at once
+    %\end{itemize}
+%\end{enumerate}
+
+\subsection{Game Theory Background}
+
+In this subsection basic notions of game theory are introduced in support
+of the following sections.
+
+\begin{itemize}
+    \item $I$ is the set of self-interested agents
+    \item $\theta_i\in \Theta$ is the type of agent $i$. $\Theta$ is the set of
+        agent types; a type stands for private information of the agent and his
+        preferences
+    \item $o \in \mathcal{O}$ is an outcome; $\mathcal{O}$ is the set of all
+        outcomes; an agent's preferences are related to outcomes 
+    \item $u_i(o, \theta_i)$ is a utility function which defines an agent's outcome
+        preferences; if $u_i(o_1, \theta_i) > u_i(o2, \theta_i)$, then
+        agent $i$ prefers outcome $o_1$ over outcome $o_2$
+\end{itemize}
+
+The concept of strategies shall also be introduced. 
+
+
+
+
+
 % ======================================================
 
 % ==============Costinteo's work=====================
