@@ -53,7 +53,7 @@ As can be seen more clearly in Prakken's original article~\cite{prakken}, his ``
 
 Concretely, we take an \emph{argumentation system} to be a tuple \( (\mathcal{L}, \mathit{cont}, S, D) \), where $\mathcal{L}$ is a ``logical language'' (not much more is given about it, except that it should contain negation), $\mathit{cont}$ is the so-called \emph{contrariness} function, and $S, D$ are, respectively, the strict and defeasible sets of inference rules. With respect to the $cont$ function, we note that it takes a member of $\mathcal{L}$ (henceforth referred to as a \emph{formula}), and returns a set of formulas. Its purpose is to generalize ordinary negation. To show how, we extract again from Prakken~\cite[page 97]{prakken}: if \( \varphi \in \mathit{cont}(\psi) \), then
 \begin{itemize}
-\item If \( \psi \not\in \mathit{cont}(\varphi) \), then $\phi$ is a \emph{contrary} of $\psi$;
+\item If \( \psi \not\in \mathit{cont}(\varphi) \), then $\varphi$ is a \emph{contrary} of $\psi$;
 \item If \( \psi \in \mathit{cont}(\varphi) \), then $\varphi$ and $\psi$ are \emph{contradictory}.
 \end{itemize}
 Moreover, it is assumed that \( \neg\varphi \in \mathit{cont}(\varphi) \) and \( \varphi \in \mathit{cont}(\neg\varphi) \). Thus, a formula and its negation are contradictory, but neither is merely a contrary of the other.
