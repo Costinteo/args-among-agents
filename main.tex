@@ -282,8 +282,8 @@ the judge.
 
 \subsection{Game Theory Background}
 
-In this subsection basic notions of game theory are introduced in support
-of the following sections.
+In this subsection core concepts of game theory are introduced in order to
+support of the following sections.
 
 \begin{itemize}
     \item $I$ is the set of self-interested agents
@@ -292,16 +292,70 @@ of the following sections.
         preferences
     \item $o \in \mathcal{O}$ is an outcome; $\mathcal{O}$ is the set of all
         outcomes; an agent's preferences are related to outcomes 
-    \item $u_i(o, \theta_i)$ is a utility function which defines an agent's outcome
-        preferences; if $u_i(o_1, \theta_i) > u_i(o2, \theta_i)$, then
+    \item $u_i(o, \theta_i)$ is a utility function which defines an agent's
+        outcome preferences; if $u_i(o_1, \theta_i) > u_i(o2, \theta_i)$, then
         agent $i$ prefers outcome $o_1$ over outcome $o_2$
+    \item $\Sigma_i$ is the set of all strategies possible for an agent $i$ and
+        $s_i(\theta_i)$ is a strategy for agent $i$. We denote by
+        \emph{strategy} a detailed guide of what action to make in each
+        possible situation.
+    \item $s = (s_1(\theta_1),\dots,s_I(\theta_I))$ is called a \emph{ strategy
+        profile} and corresponds to the outcome of a setting where
+        each agent $i$ plays strategy $s_i(\theta_i)$
+    \item The following are defined for convenience: 
+
+        $s_{-i}(\theta_{-i}) = (s_1(\theta_1),\dots,s_{i-1}(\theta_{i-1}), s_{i+1}(\theta_{i+1}),\dots,s_I(\theta_I))$
+
+        $\theta_{-i}=(\theta_1,\dots,\theta_{i-1},\theta{i+1},\dots,\theta_I)$
 \end{itemize}
 
-The concept of strategies shall also be introduced. 
+To clarify a bit, we observe that the \emph{strategy profile} $s$ has a shorter
+definition: $s = (s_i, s_{-i})$. Since $s$ is an outcome ($s \in \mathcal{O}$),
+$u_i((s_i, s_{-i})), \theta_i)$ can be interpreted as the utility of agent $i$
+considering that all other agents use strategies denoted by $s$.
 
+The fact that agents are \textbf{self-interested} is further emphasized. They
+will always chose strategies in order to maximize their own utility, but the
+choice is dependant on the strategies of the other agents. \emph{Solution
+concepts} are thus introduced.
 
+\begin{Def}[Nash equilibrium \cite{carte}]
+    Let $s^*=(s_1^*,\dots,s_I^*)$ be a \emph{strategic profile}. Formally,
+    $s^*$ is a \emph{Nash equilibrium} if the following holds:
+    $$\forall i, \forall s_i^{'} \in \Sigma_i, u_i((s_i^*, s_{-i}^*), \theta_i)
+    \geq u_i((s_i^{'},s_{-i}^*), \theta_i).$$
+    Informally, $s^*$ is a \emph{Nash equilibrium} if no agent 
+    would be better off utility-wise by changing its strategy, 
+    given that neither the other agents change their strategies.
+\end{Def}
 
+Although fundamental, the \emph{Nash equilibrium} has various weaknesses.
+In a given scenario there could be multiple Nash equilibria, so agents
+don't have a deterministic way of choosing one. Moreover, to find a Nash
+equilibrium it is implicitly assumed that agents have perfect knowledge 
+regarding all other agents.
 
+The stronger \emph{solution concept} of \emph{dominant-strategy equilibrium}
+is thus introduced.
+
+\begin{Def}[Dominant Strategy \cite{carte}] 
+    Formally, a strategy $s_i^* \in \Sigma_i$ is said to be \emph{dominant} if
+    $$\forall s_{-i}, \forall s_i^{'}, u_i((s_i^*, s_{-i}),\theta_i)
+    \gte u_i((s_i^{'}, s_{-i}),\theta_i).$$
+    Informally, $s_i^*$ is \emph{dominant} if agent $i$ maximizes
+    its utility, regardless of the strategies of the other agents.
+\end{Def}
+
+Following the above definition, a \emph{dominant-strategy equilibrium} is a
+strategy profile where all strategies played by the agents are dominant.
+Compared to the \emph{Nash equilibrium}, it is more solid as no information
+about other agents needs to be assumed. The downside is that there will
+be numerous settings where a dominant strategy cannot be found even for
+one agent.
+
+% TODO paralela cu ce s-a facut la curs saptamana 16 Jan.
+
+\subsubsection{Mechanism Design}
 
 % ======================================================
 
