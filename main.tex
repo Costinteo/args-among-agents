@@ -208,35 +208,35 @@ Consequently, since no path (dispute) in $T$ is of infinite length, this leads u
 
 What we've seen until now is an array of different argumentation protocols,
 which describe how an agent can move in different situations, by giving a set
-of possible moves. Variations among protocols can be ovserved. Some are
-``expremely prescriptive'', only allowing agents to make a move at a time,
-while others such as the \emph{persuation protocol} proposed by Prakken allows
+of possible moves. Variations among protocols can be observed. Some are
+``extremely prescriptive'', only allowing agents to make a move at a time,
+while others such as the \emph{persuasion protocol} proposed by Prakken allows
 agents multiple choices. The behaviour of agents is called a \emph{strategy}
 and it influences both the outcome (e.g. the winner) and the dynamics (e.g. the
-pace) of the dialog.
+pace) of the dialogue.
 
 Researchers started exploring different types of strategies that agents could
 use in order to chose their arguments and some of them came up with heuristic
 systems based on which agents evaluate or assert arguments.
 
-Parsons et al. \cite{parson} developed a dialogue system, part of which they
+Parsons et al. \cite{parsons2003properties} developed a dialogue system, part of which they
 defined so called \emph{agent attitudes}: such as \emph{confident} (asserts all
 propositions for which he can construct an argument), \emph{careful} (same as
 confident, but with the further restriction of not finding a stronger
 counterargument than the one found), \emph{thoughtful} (asserts only
 propositions for which he finds acceptable arguments), etc. Other researchers
-have though of using social constructs (rights and obligations) \cite{21}, or
-mental state of agents (beliefs, desires, intentions) \cite{22}.
+have though of using social constructs (rights and obligations) \cite{karunatillake2009dialogue}, or
+mental state of agents (beliefs, desires, intentions) \cite{kraus1998reaching}.
 
 The problem of the heuristic approach to designing argumentation strategies is
 that they only provide a subset of all possible strategies. It's been
 determined that an appropriate framework for doing a comprehensive study of 
 \textbf{strategic argumentation} is provided by \emph{game theory} (von Neuman and 
-Morgenstern \cite{55}). 
+Morgenstern \cite{von2007theory}). 
 
 %We can thus model a strategic argumentation scenario
-%as a game where the players are the agents argumenting, and the set of actions
-%available to them is the set of argumentative moves (eg. asserting or challenging
+%as a game where the players are the agents arguing, and the set of actions
+%available to them is the set of argumentative moves (e.g. asserting or challenging
 %a claim). The outcome rule is 
 
 Game theory can be used in the case of strategic argumentation in two main ways:
@@ -254,36 +254,24 @@ Game theory can be used in the case of strategic argumentation in two main ways:
 \subsection{Glazer and Rubenstein's Model}
 
 Glazer and Rubenstein were among the first to use \emph{game theory} in the
-analysis of argumentation \cite{17}. They used mechanism design in an attempt
+analysis of argumentation \cite{glazer2001debates}. They used mechanism design in an attempt
 to create rules of debate such that a listener can arrive to the right
 conclusion when listening to arguments from two debaters. They described a
 minimal word state depicted by a vector $\omega=(w_1, w_2, \dots, w_5)$ where
 each $w_i$ is called an ``aspect'' and has values in the set ${1, 2}$. If
 $w_i=1$ then $w_i$ supports outcome $O_1$. If $w_i=2$, then it supports outcome
 $O_2$. They model this setup as an extensive game, then consider different
-combinations of \emph{procedrual rules} (which determine the order and type of
+combinations of \emph{procedural rules} (which determine the order and type of
 arguments each debater is allowed to state) and \emph{persuasion rules} (which
-determine how the listener determines the outcome). Since the \emph{persuation
+determine how the listener determines the outcome). Since the \emph{persuasion
 rules} are chosen arbitrarily, there cannot be determined a rigorous
 correlation between the meaning of the arguments and the conclusion of 
 the judge.
 
-%\begin{enumerate}
-    %\item \emph{procedural rules} -- about the order and type of arguments each
-        %debatee is allowed to state \begin{itemize}
-        %\item \emph{one-speaker debate} -- two arguments are revealed at once by
-            %one debatee
-        %\item \emph{simultaneous debate} -- the two debatees simultanously each
-            %reveal one argument
-        %\item \emph{sequential debate} -- debatees take turns, each revealing one
-            %argument at once
-    %\end{itemize}
-%\end{enumerate}
-
 \subsection{Game Theory Background}
 
-In this subsection core concepts of game theory are introduced in order to
-support of the following sections.
+In this subsection core concepts of game theory are introduced in support of
+the following sections.
 
 \begin{itemize}
     \item $I$ is the set of self-interested agents
@@ -319,7 +307,7 @@ will always chose strategies in order to maximize their own utility, but the
 choice is dependant on the strategies of the other agents. \emph{Solution
 concepts} are thus introduced.
 
-\begin{Def}[Nash equilibrium \cite{carte}]
+\begin{Def}[Nash equilibrium \cite{weiss}]
     Let $s^*=(s_1^*,\dots,s_I^*)$ be a \emph{strategic profile}. Formally,
     $s^*$ is a \emph{Nash equilibrium} if the following holds:
     $$\forall i, \forall s_i^{'} \in \Sigma_i, u_i((s_i^*, s_{-i}^*), \theta_i)
@@ -338,10 +326,10 @@ regarding all other agents.
 The stronger \emph{solution concept} of \emph{dominant-strategy equilibrium}
 is thus introduced.
 
-\begin{Def}[Dominant Strategy \cite{carte}] 
+\begin{Def}[Dominant Strategy \cite{weiss}] 
     Formally, a strategy $s_i^* \in \Sigma_i$ is said to be \emph{dominant} if
     $$\forall s_{-i}, \forall s_i^{'}, u_i((s_i^*, s_{-i}),\theta_i)
-    \gte u_i((s_i^{'}, s_{-i}),\theta_i).$$
+    \ge u_i((s_i^{'}, s_{-i}),\theta_i).$$
     Informally, $s_i^*$ is \emph{dominant} if agent $i$ maximizes
     its utility, regardless of the strategies of the other agents.
 \end{Def}
@@ -353,9 +341,67 @@ about other agents needs to be assumed. The downside is that there will
 be numerous settings where a dominant strategy cannot be found even for
 one agent.
 
-% TODO paralela cu ce s-a facut la curs saptamana 16 Jan.
-
 \subsubsection{Mechanism Design}
+
+The problem studied by mechanism design is that of achieving a desired
+outcome when dealing with a group of self-interested agents. The outcome
+usually depends on the preferences of the agents and can be described 
+through what is called a \emph{social choice} function.
+
+\begin{Def}[Social choice function]
+    A social choice function is defined as $f:\Theta_1 \times \dots \times \Theta_I \rightarrow \mathcal{O}$, s.t $f(\theta) \in \mathcal{O}$ and $\theta=(\theta_1,\dots,\theta_I)$.
+    Informally, a social choice function matches agent types to outcomes.
+\end{Def}
+
+The \emph{social choice function} is based on the agent type. As it is
+private information of the agent and the agent cannot be trusted to
+truthfully reveal his type (as it might be to his advantage to lie),
+a \emph{mechanism} is used to reach the right outcome.
+
+$\Sigma=\Sigma_1 \times \dots \times \Sigma_I$ is defined as a restricted set
+of strategies that the agents can choose from, agent $i$ choosing from the set
+$\Sigma_i$. Also, let $g:\Sigma\rightarrow\mathcal{O}$ be the outcome $o$ of
+the strategy $s=(s_1,\dots,s_I)\in\Sigma$. A mechanism
+$\mathcal{M}=(\Sigma,g(\cdot))$ based on the above mentioned, defines a game
+where the choices of the agents are limited to $\Sigma$. It is said that the
+mechanism \emph{implements} a social choice function $f$ if the outcome induced by
+the mechanism is the same as the outcome returned by the function applied on
+the true types of the agents.
+
+\begin{Def}[Implementation \cite{weiss}] $\mathcal{M}=(\Sigma, g(\cdot))$ is a mechanism
+    that implements the social function $f$ if there is $s^*$ an equilibrium
+    s.t. $\forall \theta\in\Theta$, $g(s^*(\theta))=f(\theta)$.  
+\end{Def}
+
+\begin{Def}[Direct-revelation mechanism \cite{weiss}] Formally, a mechanism is
+    direct-revealing if $\forall i, \Sigma_i=\Theta_i$, and $\forall \theta \in
+    \Theta, g(\theta)=f(\theta)$.
+    Informally, the strategies of all agents are to announce a type $\theta_i^{'}$
+    to the \emph{mechanism}
+\end{Def}
+
+The above are a special class of \emph{mechanism} where each agent's strategy
+is to announce a type $\theta_i^{'}$. It is said that a social function
+$f(\cdot)$ is \emph{incentive compatible} if it can be \emph{implemented}
+by a direct mechanism $\mathcal{M}$ where all agents reveal their true type. \cite{mas1995microeconomic}.
+
+\subsubsection{The Revelation Principle}
+
+Since the strategy search spaces are unlimited in the classical definition of a
+\emph{mechanism}, finding a \emph{mechanism} that implements a social function
+is hard. The \emph{revelation principle} is thus useful, stating that the search
+can be limited only to a particular class of mechanisms \cite{mas1995microeconomic}.
+
+\begin{Def}[Revelation Principle \cite{weiss}] If considering dominant
+    strategies, there exists a mechanism that implements social function f,
+    then there exists a truthful direct mechanism that implements social
+    function f, considering dominant strategies.
+\end{Def}
+
+The \emph{revelation principle} states that the search field can be restricted
+to the class of truthful, direct mechanisms. We can conclude that no mechanism
+that implements the social function exists if we cannot find a mechanism in
+this restricted space.
 
 % ======================================================
 
