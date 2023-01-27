@@ -366,9 +366,9 @@ $\Sigma_i$. Also, let $g$ be the function defined as
 $g:\Sigma\rightarrow\mathcal{O}$ and $g(s)$ the outcome $o$ of the strategy
 $s=(s_1,\dots,s_I)\in\Sigma$. A mechanism $\mathcal{M}=(\Sigma,g(\cdot))$ based
 on the above, defines a game where the choices of the agents are limited to
-$\Sigma$. It is said that the mechanism \emph{implements} a social choice
-function $f$ if the outcome induced by the mechanism is the same as the outcome
-returned by the function applied on the true types of the agents.
+$\Sigma$. It is said that a social choice function $f$ is \emph{implemented} by
+the mechanism if the outcome resulted from the mechanism corresponds to the
+outcome returned by the function applied on the true types of the agents.
 
 \begin{Def}[Implementation \cite{weiss}] $\mathcal{M}=(\Sigma, g(\cdot))$ is a mechanism
     that implements the social function $f$, if there exists $s^*$ an
@@ -384,26 +384,27 @@ returned by the function applied on the true types of the agents.
 
 The above are a special class of \emph{mechanism} where each agent's strategy
 is to announce a type $\theta_i^{'}$. It is said that a social function
-$f(\cdot)$ is \emph{incentive compatible} if it can be \emph{implemented}
-by a direct mechanism $\mathcal{M}$ where all agents reveal their true type. \cite{mas1995microeconomic}.
+$f(\cdot)$ is \emph{incentive compatible} if there is a direct mechanism
+$\mathcal{M}$, with all agents truthfully reveal their type, which implements
+it \cite{mas1995microeconomic}.
 
 \subsubsection{The Revelation Principle}
 
 Since the strategy search spaces are unlimited in the classical definition of a
-\emph{mechanism}, finding a \emph{mechanism} that implements a social function
-is hard. The \emph{revelation principle} is thus useful, stating that the search
-can be limited only to a particular class of mechanisms \cite{mas1995microeconomic}.
+\emph{mechanism}, it is not an easy task to find a \emph{mechanism} that
+implements a social function. The \emph{revelation principle} is thus useful,
+stating that the search can be limited only to a particular class of mechanisms
+\cite{mas1995microeconomic}.
 
-\begin{Def}[Revelation Principle \cite{weiss}] If considering dominant\\
-    strategies, there exists a mechanism that implements social function f,
-    then there exists a truthful direct mechanism that implements social
-    function f, considering dominant strategies.
+\begin{Def}[Revelation Principle \cite{weiss}] If a mechanism implementing the
+    social choice function $f$ exists in dominant strategies, then a truthful
+    direct mechanism implementing $f$ exists in dominant strategies.
 \end{Def}
 
-The \emph{revelation principle} states that the search field can be restricted
-to the class of truthful, direct mechanisms. We can conclude that no mechanism
-that implements the social function exists if we cannot find a mechanism in
-this restricted space.
+From the \emph{revelation principle}'s definition we can deduce that the search
+field can be restricted to the class of truthful, direct mechanisms. As a
+result of this, \textbf{no mechanism} that implements the social function exists,
+if we cannot find at least one in this restricted space.
 
 % ======================================================
 
