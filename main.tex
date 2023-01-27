@@ -208,7 +208,7 @@ Consequently, since no path (dispute) in $T$ is of infinite length, this leads u
 \section{Strategic Argumentation \& Game Theory}
 
 What we've seen until now is an array of different argumentation protocols,
-which describe how an agent can move in different situations, by giving a set
+which describe how an agent can move in different situations, given a set
 of possible moves. Variations among protocols can be observed. Some are
 ``extremely prescriptive'', only allowing agents to make a move at a time,
 while others such as the \emph{persuasion protocol} proposed by Prakken allows
@@ -217,23 +217,24 @@ and it influences both the outcome (e.g. the winner) and the dynamics (e.g. the
 pace) of the dialogue.
 
 Researchers started exploring different types of strategies that agents could
-use in order to chose their arguments and some of them came up with heuristic
+use in order to chose their arguments. Some of them came up with heuristic
 systems based on which agents evaluate or assert arguments.
 
-Parsons et al. \cite{parsons2003properties} developed a dialogue system, part of which they
-defined so called \emph{agent attitudes}: such as \emph{confident} (asserts all
-propositions for which he can construct an argument), \emph{careful} (same as
-confident, but with the further restriction of not finding a stronger
-counterargument than the one found), \emph{thoughtful} (asserts only
-propositions for which he finds acceptable arguments), etc. Other researchers
-have though of using social constructs (rights and obligations) \cite{karunatillake2009dialogue}, or
-mental state of agents (beliefs, desires, intentions) \cite{kraus1998reaching}.
+Parsons et al. \cite{parsons2003properties} developed a dialogue system, part
+of which they defined so called \emph{agent attitudes}, such as
+\emph{confident} (asserts all propositions for which he can construct an
+argument), \emph{careful} (same as confident, but with the further restriction
+of not finding a stronger counterargument than the one found),
+\emph{thoughtful} (asserts only propositions for which he finds acceptable
+arguments), etc. Other researchers have though of using social constructs
+(rights and obligations) \cite{karunatillake2009dialogue}, or the mental state
+of agents (beliefs, desires, intentions) \cite{kraus1998reaching}.
 
 The problem of the heuristic approach to designing argumentation strategies is
-that they only provide a subset of all possible strategies. It's been
-determined that an appropriate framework for doing a comprehensive study of 
-\textbf{strategic argumentation} is provided by \emph{game theory} (von Neuman and 
-Morgenstern \cite{von2007theory}). 
+that they only provide a subset of all possible strategies. However, it's been
+determined that an appropriate framework for doing a comprehensive study of
+\textbf{strategic argumentation} is provided by \emph{game theory} (von Neuman
+and Morgenstern \cite{von2007theory}). 
 
 %We can thus model a strategic argumentation scenario
 %as a game where the players are the agents arguing, and the set of actions
@@ -258,8 +259,8 @@ Glazer and Rubenstein were among the first to use \emph{game theory} in the
 analysis of argumentation \cite{glazer2001debates}. They used mechanism design in an attempt
 to create rules of debate such that a listener can arrive to the right
 conclusion when listening to arguments from two debaters. They described a
-minimal word state depicted by a vector $\omega=(w_1, w_2, \dots, w_5)$ where
-each $w_i$ is called an ``aspect'' and has values in the set ${1, 2}$. If
+minimal world state depicted by a vector $\omega=(w_1, w_2, \dots, w_5)$ where
+each $w_i$ is called an ``aspect'' and has values in the set $\{1, 2\}$. If
 $w_i=1$ then $w_i$ supports outcome $O_1$. If $w_i=2$, then it supports outcome
 $O_2$. They model this setup as an extensive game, then consider different
 combinations of \emph{procedural rules} (which determine the order and type of
@@ -282,7 +283,7 @@ the following sections.
     \item $o \in \mathcal{O}$ is an outcome; $\mathcal{O}$ is the set of all
         outcomes; an agent's preferences are related to outcomes 
     \item $u_i(o, \theta_i)$ is a utility function which defines an agent's
-        outcome preferences; if $u_i(o_1, \theta_i) > u_i(o2, \theta_i)$, then
+        outcome preferences; if $u_i(o_1, \theta_i) > u_i(o_2, \theta_i)$, then
         agent $i$ prefers outcome $o_1$ over outcome $o_2$
     \item $\Sigma_i$ is the set of all strategies possible for an agent $i$ and
         $s_i(\theta_i)$ is a strategy for agent $i$. We denote by
@@ -295,7 +296,7 @@ the following sections.
 
         $s_{-i}(\theta_{-i}) = (s_1(\theta_1),\dots,s_{i-1}(\theta_{i-1}), s_{i+1}(\theta_{i+1}),\dots,s_I(\theta_I))$
 
-        $\theta_{-i}=(\theta_1,\dots,\theta_{i-1},\theta{i+1},\dots,\theta_I)$
+        $\theta_{-i}=(\theta_1,\dots,\theta_{i-1},\theta_{i+1},\dots,\theta_I)$
 \end{itemize}
 
 To clarify a bit, we observe that the \emph{strategy profile} $s$ has a shorter
@@ -315,14 +316,14 @@ concepts} are thus introduced.
     \geq u_i((s_i^{'},s_{-i}^*), \theta_i).$$
     Informally, $s^*$ is a \emph{Nash equilibrium} if no agent 
     would be better off utility-wise by changing its strategy, 
-    given that neither the other agents change their strategies.
+    given that neither of the other agents changes its strategy.
 \end{Def}
 
 Although fundamental, the \emph{Nash equilibrium} has various weaknesses.
 In a given scenario there could be multiple Nash equilibria, so agents
 don't have a deterministic way of choosing one. Moreover, to find a Nash
 equilibrium it is implicitly assumed that agents have perfect knowledge 
-regarding all other agents.
+of all other agents's preferences.
 
 The stronger \emph{solution concept} of \emph{dominant-strategy equilibrium}
 is thus introduced.
@@ -361,24 +362,24 @@ a \emph{mechanism} is used to reach the right outcome.
 
 $\Sigma=\Sigma_1 \times \dots \times \Sigma_I$ is defined as a restricted set
 of strategies that the agents can choose from, agent $i$ choosing from the set
-$\Sigma_i$. Also, let $g:\Sigma\rightarrow\mathcal{O}$ be the outcome $o$ of
-the strategy $s=(s_1,\dots,s_I)\in\Sigma$. A mechanism
-$\mathcal{M}=(\Sigma,g(\cdot))$ based on the above mentioned, defines a game
-where the choices of the agents are limited to $\Sigma$. It is said that the
-mechanism \emph{implements} a social choice function $f$ if the outcome induced by
-the mechanism is the same as the outcome returned by the function applied on
-the true types of the agents.
+$\Sigma_i$. Also, let $g$ be the function defined as
+$g:\Sigma\rightarrow\mathcal{O}$ and $g(s)$ the outcome $o$ of the strategy
+$s=(s_1,\dots,s_I)\in\Sigma$. A mechanism $\mathcal{M}=(\Sigma,g(\cdot))$ based
+on the above, defines a game where the choices of the agents are limited to
+$\Sigma$. It is said that the mechanism \emph{implements} a social choice
+function $f$ if the outcome induced by the mechanism is the same as the outcome
+returned by the function applied on the true types of the agents.
 
 \begin{Def}[Implementation \cite{weiss}] $\mathcal{M}=(\Sigma, g(\cdot))$ is a mechanism
-    that implements the social function $f$ if there is $s^*$ an equilibrium
-    s.t. $\forall \theta\in\Theta$, $g(s^*(\theta))=f(\theta)$.  
+    that implements the social function $f$, if there exists $s^*$ an
+    equilibrium s.t. $\forall \theta\in\Theta$, $g(s^*(\theta))=f(\theta)$.  
 \end{Def}
 
-\begin{Def}[Direct-revelation mechanism \cite{weiss}] Formally, a mechanism is
+\begin{Def}[Direct-revelation mechanism \cite{weiss}] Formally, a \\mechanism is
     direct-revealing if $\forall i, \Sigma_i=\Theta_i$, and $\forall \theta \in
     \Theta, g(\theta)=f(\theta)$.
     Informally, the strategies of all agents are to announce a type $\theta_i^{'}$
-    to the \emph{mechanism}
+    to the \emph{mechanism}.
 \end{Def}
 
 The above are a special class of \emph{mechanism} where each agent's strategy
@@ -393,7 +394,7 @@ Since the strategy search spaces are unlimited in the classical definition of a
 is hard. The \emph{revelation principle} is thus useful, stating that the search
 can be limited only to a particular class of mechanisms \cite{mas1995microeconomic}.
 
-\begin{Def}[Revelation Principle \cite{weiss}] If considering dominant
+\begin{Def}[Revelation Principle \cite{weiss}] If considering dominant\\
     strategies, there exists a mechanism that implements social function f,
     then there exists a truthful direct mechanism that implements social
     function f, considering dominant strategies.
