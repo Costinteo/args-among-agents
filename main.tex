@@ -146,8 +146,6 @@ An argument $p$ is:
 \newpage
 % ===================================================
 
-
-
 % =================Edi's work========================
 \section{Argumentation Protocols}
 In the previous section, we have presented two possible models for formalizing the idea of argumentation: Prakken's framework and Dung's model. We find that both of them manage to  capture the intuition behind the essence of an argument reasonably well. However, we shall see that the author focuses on the latter model to present a mechanism by which two agents can participate in a \emph{dispute} where they can state and attack each other's arguments, much as in a real world debate.
@@ -201,8 +199,218 @@ We shall prove that $d$ is of finite length; more specifically, exactly of lengt
 Consequently, since no path (dispute) in $T$ is of infinite length, this leads us to the conclusion that, indeed, $T$ is finite.
 % ===================================================
 
+% ======================================================
 
-	% ==============Costinteo's work=====================
+% =================Stefan's work========================
+
+\newpage
+
+\section{Strategic Argumentation \& Game Theory}
+
+What we've seen until now is an array of different argumentation protocols,
+which describe how an agent can move in different situations, given a set
+of possible moves. Variations among protocols can be observed. Some are
+``extremely prescriptive'', only allowing agents to make a move at a time,
+while others such as the \emph{persuasion protocol} proposed by Prakken allows
+agents multiple choices. The behaviour of agents is called a \emph{strategy}
+and it influences both the outcome (e.g. the winner) and the dynamics (e.g. the
+pace) of the dialogue.
+
+Researchers started exploring different types of strategies that agents could
+use in order to chose their arguments. Some of them came up with heuristic
+systems based on which agents evaluate or assert arguments.
+
+Parsons et al. \cite{parsons2003properties} developed a dialogue system, part
+of which they defined so called \emph{agent attitudes}, such as
+\emph{confident} (asserts all propositions for which he can construct an
+argument), \emph{careful} (same as confident, but with the further restriction
+of not finding a stronger counterargument than the one found),
+\emph{thoughtful} (asserts only propositions for which he finds acceptable
+arguments), etc. Other researchers have though of using social constructs
+(rights and obligations) \cite{karunatillake2009dialogue}, or the mental state
+of agents (beliefs, desires, intentions) \cite{kraus1998reaching}.
+
+The problem of the heuristic approach to designing argumentation strategies is
+that they only provide a subset of all possible strategies. However, it's been
+determined that an appropriate framework for doing a comprehensive study of
+\textbf{strategic argumentation} is provided by \emph{game theory} (von Neuman
+and Morgenstern \cite{von2007theory}). 
+
+%We can thus model a strategic argumentation scenario
+%as a game where the players are the agents arguing, and the set of actions
+%available to them is the set of argumentative moves (e.g. asserting or challenging
+%a claim). The outcome rule is 
+
+Game theory can be used in the case of strategic argumentation in two main ways:
+\begin{enumerate}
+    \item a thorough analysis of the strategic scenario can be tackled,
+        focusing on predicting the outcome of the game; an agent can use this
+        analysis to choose the best strategy for his exact scenario
+    \item design rules for the game (here, \emph{argumentation protocol}) in
+        such a way that the behaviour of the agents follows a desired path
+        (e.g. promoting ``good'' argumentative behaviour); this is called
+        \emph{mechanism design} and will be further described in a following
+        section.
+\end{enumerate}
+
+\subsection{Glazer and Rubenstein's Model}
+
+Glazer and Rubenstein were among the first to use \emph{game theory} in the
+analysis of argumentation \cite{glazer2001debates}. They used mechanism design in an attempt
+to create rules of debate such that a listener can arrive to the right
+conclusion when listening to arguments from two debaters. They described a
+minimal world state depicted by a vector $\omega=(w_1, w_2, \dots, w_5)$ where
+each $w_i$ is called an ``aspect'' and has values in the set $\{1, 2\}$. If
+$w_i=1$ then $w_i$ supports outcome $O_1$. If $w_i=2$, then it supports outcome
+$O_2$. They model this setup as an extensive game, then consider different
+combinations of \emph{procedural rules} (which determine the order and type of
+arguments each debater is allowed to state) and \emph{persuasion rules} (which
+determine how the listener determines the outcome). Since the \emph{persuasion
+rules} are chosen arbitrarily, there cannot be determined a rigorous
+correlation between the meaning of the arguments and the conclusion of 
+the judge.
+
+\subsection{Game Theory Background}
+
+In this subsection core concepts of game theory are introduced in support of
+the following sections.
+
+\begin{itemize}
+    \item $I$ is the set of self-interested agents
+    \item $\theta_i\in \Theta$ is the type of agent $i$. $\Theta$ is the set of
+        agent types; a type stands for private information of the agent and his
+        preferences
+    \item $o \in \mathcal{O}$ is an outcome; $\mathcal{O}$ is the set of all
+        outcomes; an agent's preferences are related to outcomes 
+    \item $u_i(o, \theta_i)$ is a utility function which defines an agent's
+        outcome preferences; if $u_i(o_1, \theta_i) > u_i(o_2, \theta_i)$, then
+        agent $i$ prefers outcome $o_1$ over outcome $o_2$
+    \item $\Sigma_i$ is the set of all strategies possible for an agent $i$ and
+        $s_i(\theta_i)$ is a strategy for agent $i$. We denote by
+        \emph{strategy} a detailed guide of what action to make in each
+        possible situation.
+    \item $s = (s_1(\theta_1),\dots,s_I(\theta_I))$ is called a \emph{ strategy
+        profile} and corresponds to the outcome of a setting where
+        each agent $i$ plays strategy $s_i(\theta_i)$
+    \item The following are defined for convenience: 
+
+        $s_{-i}(\theta_{-i}) = (s_1(\theta_1),\dots,s_{i-1}(\theta_{i-1}), s_{i+1}(\theta_{i+1}),\dots,s_I(\theta_I))$
+
+        $\theta_{-i}=(\theta_1,\dots,\theta_{i-1},\theta_{i+1},\dots,\theta_I)$
+\end{itemize}
+
+To clarify a bit, we observe that the \emph{strategy profile} $s$ has a shorter
+definition: $s = (s_i, s_{-i})$. Since $s$ is an outcome ($s \in \mathcal{O}$),
+$u_i((s_i, s_{-i})), \theta_i)$ can be interpreted as the utility of agent $i$
+considering that all other agents use strategies denoted by $s$.
+
+The fact that agents are \textbf{self-interested} is further emphasized. They
+will always chose strategies in order to maximize their own utility, but the
+choice is dependant on the strategies of the other agents. \emph{Solution
+concepts} are thus introduced.
+
+\begin{Def}[Nash equilibrium \cite{weiss}]
+    Let $s^*=(s_1^*,\dots,s_I^*)$ be a \emph{strategic profile}. Formally,
+    $s^*$ is a \emph{Nash equilibrium} if the following holds:
+    $$\forall i, \forall s_i^{'} \in \Sigma_i, u_i((s_i^*, s_{-i}^*), \theta_i)
+    \geq u_i((s_i^{'},s_{-i}^*), \theta_i).$$
+    Informally, $s^*$ is a \emph{Nash equilibrium} if no agent 
+    would be better off utility-wise by changing its strategy, 
+    given that neither of the other agents changes its strategy.
+\end{Def}
+
+Although fundamental, the \emph{Nash equilibrium} has various weaknesses.
+In a given scenario there could be multiple Nash equilibria, so agents
+don't have a deterministic way of choosing one. Moreover, to find a Nash
+equilibrium it is implicitly assumed that agents have perfect knowledge 
+of all other agents's preferences.
+
+The stronger \emph{solution concept} of \emph{dominant-strategy equilibrium}
+is thus introduced.
+
+\begin{Def}[Dominant Strategy \cite{weiss}] 
+    Formally, a strategy $s_i^* \in \Sigma_i$ is said to be \emph{dominant} if
+    $$\forall s_{-i}, \forall s_i^{'}, u_i((s_i^*, s_{-i}),\theta_i)
+    \ge u_i((s_i^{'}, s_{-i}),\theta_i).$$
+    Informally, $s_i^*$ is \emph{dominant} if agent $i$ maximizes
+    its utility, regardless of the strategies of the other agents.
+\end{Def}
+
+Following the above definition, a \emph{dominant-strategy equilibrium} is a
+strategy profile where all strategies played by the agents are dominant.
+Compared to the \emph{Nash equilibrium}, it is more solid as no information
+about other agents needs to be assumed. The downside is that there will
+be numerous settings where a dominant strategy cannot be found even for
+one agent.
+
+\subsubsection{Mechanism Design}
+
+The problem studied by mechanism design is that of achieving a desired
+outcome when dealing with a group of self-interested agents. The outcome
+usually depends on the preferences of the agents and can be described 
+through what is called a \emph{social choice} function.
+
+\begin{Def}[Social choice function]
+    A social choice function is defined as $f:\Theta_1 \times \dots \times \Theta_I \rightarrow \mathcal{O}$, s.t $f(\theta) \in \mathcal{O}$ and $\theta=(\theta_1,\dots,\theta_I)$.
+    Informally, a social choice function matches agent types to outcomes.
+\end{Def}
+
+The \emph{social choice function} is based on the agent type. As it is
+private information of the agent and the agent cannot be trusted to
+truthfully reveal his type (as it might be to his advantage to lie),
+a \emph{mechanism} is used to reach the right outcome.
+
+$\Sigma=\Sigma_1 \times \dots \times \Sigma_I$ is defined as a restricted set
+of strategies that the agents can choose from, agent $i$ choosing from the set
+$\Sigma_i$. Also, let $g$ be the function defined as
+$g:\Sigma\rightarrow\mathcal{O}$ and $g(s)$ the outcome $o$ of the strategy
+$s=(s_1,\dots,s_I)\in\Sigma$. A mechanism $\mathcal{M}=(\Sigma,g(\cdot))$ based
+on the above, defines a game where the choices of the agents are limited to
+$\Sigma$. It is said that the mechanism \emph{implements} a social choice
+function $f$ if the outcome induced by the mechanism is the same as the outcome
+returned by the function applied on the true types of the agents.
+
+\begin{Def}[Implementation \cite{weiss}] $\mathcal{M}=(\Sigma, g(\cdot))$ is a mechanism
+    that implements the social function $f$, if there exists $s^*$ an
+    equilibrium s.t. $\forall \theta\in\Theta$, $g(s^*(\theta))=f(\theta)$.  
+\end{Def}
+
+\begin{Def}[Direct-revelation mechanism \cite{weiss}] Formally, a \\mechanism is
+    direct-revealing if $\forall i, \Sigma_i=\Theta_i$, and $\forall \theta \in
+    \Theta, g(\theta)=f(\theta)$.
+    Informally, the strategies of all agents are to announce a type $\theta_i^{'}$
+    to the \emph{mechanism}.
+\end{Def}
+
+The above are a special class of \emph{mechanism} where each agent's strategy
+is to announce a type $\theta_i^{'}$. It is said that a social function
+$f(\cdot)$ is \emph{incentive compatible} if it can be \emph{implemented}
+by a direct mechanism $\mathcal{M}$ where all agents reveal their true type. \cite{mas1995microeconomic}.
+
+\subsubsection{The Revelation Principle}
+
+Since the strategy search spaces are unlimited in the classical definition of a
+\emph{mechanism}, finding a \emph{mechanism} that implements a social function
+is hard. The \emph{revelation principle} is thus useful, stating that the search
+can be limited only to a particular class of mechanisms \cite{mas1995microeconomic}.
+
+\begin{Def}[Revelation Principle \cite{weiss}] If considering dominant\\
+    strategies, there exists a mechanism that implements social function f,
+    then there exists a truthful direct mechanism that implements social
+    function f, considering dominant strategies.
+\end{Def}
+
+The \emph{revelation principle} states that the search field can be restricted
+to the class of truthful, direct mechanisms. We can conclude that no mechanism
+that implements the social function exists if we cannot find a mechanism in
+this restricted space.
+
+% ======================================================
+
+% ==============Costinteo's work=====================
+
+\newpage
+
 \section{The Argument Interchange Format}
 In the previous sections, we have elaborated on the semantics of arguments, the argumentation protocols, as well as the application of game theory in strategic argumentation. However, there has been no mention of a universal way of sharing the data underlying the arguments. This problem is especially evident in the practical implementations of such argumentation systems. Therefore, a community-led effort has laid down the foundations of a common, standardized specification for representing arguments and sharing integral data to their unfolding, called the \emph{Argumentation Interchange Format (AIF)} \cite{aif}.
 
