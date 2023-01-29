@@ -1,2 +1,0 @@
-\beamer@sectionintoc {1}{Florin}{2}{0}{1}
-\beamer@sectionintoc {2}{Eduard}{35}{0}{2}
