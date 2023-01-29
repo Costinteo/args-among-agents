@@ -259,7 +259,7 @@
 	\begin{itemize}
 		\item The author focuses on Dung's model to present a mechanism by which two agents can participate in a \emph{dispute} where they can state and attack each other's arguments, much as in a real world debate. \pause
 
-		\item Formalize such an argumentation process and additionally enforce a set of constraints in order to capture various semantics (for example, an agent cannot contradict himself).
+		\item Objective: Formalize such an argumentation process and additionally enforce a set of constraints in order to capture various semantics (for example, an agent cannot contradict himself).
 	\end{itemize}
 \end{frame}
 
@@ -268,8 +268,8 @@
 	\begin{itemize}
 		\item Two players: \textbf{PRO} and \textbf{OPP} \pause
 
-		\item PRO is the proponent which states the initial argument. \pause
-		\item OPP is the opponent which begins by counter-attacking the argument proposed by PRO.\pause
+		\item PRO is the proponent who states the initial argument. \pause
+		\item OPP is the opponent who begins by counter-attacking the argument proposed by PRO.\pause
 		\item Both players take turns in defeating the last argument that has been put forward by their counterpart player.\pause
 		\item The game is considered to be won by the player who states an argument $a$ that cannot be defeated (i.e. $a^{-} = \emptyset$)
 	\end{itemize}
@@ -281,7 +281,7 @@
 		\item The author calls the sequence of moves done by the players a \emph{dispute}, a notion which is intensively used in further definitions and proofs. \pause
 		\item However, a concrete definition is not provided. We attempt to state the following formal definition: \pause
 		\begin{Def}[dispute]
-			Given an argumentation framework $(\mathcal{A}, \df)$, a dispute is a sequence $(a_{k})_{k \in \mathbb{N}}$ (possibly infinite) of arguments from $\mathcal{A}$ where the following property holds: $\forall i \in \mathbb{N^*},  a_{i} \df a_{i-1}$ (i.e. every argument in the sequence defeats its preceding argument).
+			Given an argumentation framework $(\mathcal{A}, \df)$, a dispute is a nonempty, possibly infinite sequence $d$ of arguments in $\mathcal{A}$ with the following property: $d_{i+1} \df d_i$, whenever $i$ and $i+1$ are in $d$'s domain (i.e. every argument in the sequence defeats its preceding argument).
 		\end{Def}
 	\end{itemize}
 \end{frame}
@@ -291,21 +291,27 @@
 	\begin{itemize}
 		\item Observation: A player could potentially counter-attack its counterpart player with any argument whatsoever that defeats the last move. \pause
 		\item This leads to multiple disputes based on the defeating argument chosen by the player, which can be conveniently modeled as a \emph{dispute tree}, as shown by the author.\pause
-		\item Again, a definition is not provided. We attempt to adapt one from \emph{Modgil et. al}:\pause
+		\item Again, a definition is not provided. We attempt to adapt one from \emph{Modgil et al.}\pause
 		\begin{Def}[dispute trees]
-			Given an argumentation framework\\ $(\mathcal{A}, \df)$ and an argument $p$ in $\mathcal{A}$, a dispute tree induced by $p$ is a tree $T$ rooted in $p$, where each node represents an argument from $\mathcal{A}$ and for all arguments $x, y$ in $\mathcal{A}$, $x$ is a child of $y$ in $T$ iff $x$ defeats $y$.
+			Given an argumentation framework $(\mathcal{A}, \df)$ and an argument $p$ in $\mathcal{A}$, a dispute tree induced by $p$ is a tree $T$ rooted in $p$, where each node is labelled with an argument in $\mathcal{A}$  and for every node $v$, $v$ has a child labelled $x$ iff $v$'s label is defeated by x.
 		\end{Def}
 	\end{itemize}
 \end{frame}
 
+\begin{frame}
+	\frametitle{An example from the book}
+	\begin{figure}
+		\includegraphics[width=\textwidth]{images/dispute_tree}
+	\end{figure}
+\end{frame}
 
 \begin{frame}
 	\frametitle{Protocol $G$}
 	\begin{itemize}
 		\item The author establishes a rule (called protocol $G$) by which the PRO player cannot repeat an argument in a dispute.\pause
-		\item We provide a definition with regards to a decision tree:\pause
+		\item We provide a definition with regard to a dispute tree:\pause
 		\begin{Def}[dispute tree under protocol G]\label{protG}
-			Given a dispute tree $T$, we consider $T$ to be under protocol G iff for any arbitrary dispute $d$ in $T$ and for any pair of arguments $x$, $y$ stated by PRO in $d$, $x$ is different than $y$.
+			Given a dispute tree $T$, we consider $T$ to be under protocol G iff for an arbitrary dispute $d$ in $T$ and for any pair of arguments $x$, $y$ stated by PRO at different indices in $d$, $x$ is different than $y$.
 		\end{Def}\pause
 		\item It is claimed by the author that the following property is true, to which we provide a proof:\pause
 
@@ -318,10 +324,10 @@
 \begin{frame}
 	\frametitle{Proof sketch}
 	\begin{itemize}
-		\item Let $n = card(\mathcal{A})$ and $d = (a_{k})_{k \in \mathbb{N}}$ be a dispute in $T$ of length of at least $2n$ arguments (we do not consider the other disputes, since we know they are of finite length).\pause
-		\item We shall prove that $d$ is of finite length; more specifically, exactly of length $2n$. We consider the argument $a_{2n - 1}$ from our sequence $d$.\pause
+		\item Let $n = card(\mathcal{A})$ and $d$ be a dispute in $T$ of length of at least $2n$ arguments (we do not consider the other disputes, since we know they are of finite length).\pause
+		\item We shall prove that $d$ is of finite length; more specifically, exactly of length $2n$. We consider the argument $d_{2n - 1}$ from our sequence $d$.\pause
 		\item By protocol G, we have exactly $n$ different arguments uttered by PRO, which cover all the arguments in the set $\mathcal{A}$. \pause
-		\item Assume that $a_{2n}$ exists. This being the $n+1$'th argument stated by PRO, it must coincide with an argument that has been uttered before, since we have a total of only $n$ different arguments to choose from (Dirichlet's box principle). \pause
+		\item Assume that $d_{2n}$ exists. This being the $n+1$'st argument stated by PRO, it must coincide with an argument that has been uttered before, since we have a total of only $n$ different arguments to choose from (Dirichlet's box principle). \pause
 		\item However, this contradicts protocol G. Hence, $d$ is finite.
 	\end{itemize}
 \end{frame}
