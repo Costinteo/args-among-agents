@@ -11,6 +11,10 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 
+\usepackage{mathtools} % pentru sageti cu scris peste
+\newtheorem{Def}{Definition}[subsection]
+\newtheorem{Ex}{Example}[subsection]
+\newtheorem{Claim}{Claim}
 
 \begin{document}
 
@@ -262,37 +266,38 @@
 
 \begin{frame}{Overview of strategic argumentation}
 \begin{itemize}
+    \pause
     \item Various argumentation systems introduced. Each defines restrictions regarding what agents can and cannot do (e.g. Prakken's framework) \pause
-    \item To analyze how a system behaves, one must also analyze the behaviour of agents, which will further be called ``strategy'' \pause
-    \item Researchers started studying \emph{strategies} and how they affect the outcome of the argumentation \pause
+    \item Behaviour of agents must be analyzed. This is called a ``strategy'' \pause
     \item Parsons et al. introduce the \emph{dialogue system} based on \emph{attitudes} (e.g. confident, careful, thoughtful) \pause
-    \item Other models based on \emph{social constructs} or \emph{mental states} are proposed by Nishan et al. and Kraus et al. \pause
+    \item Other models based on \emph{social constructs} or \emph{mental states} are proposed by Nishan et al. and Kraus et al.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Why Game Theory}
 \begin{itemize}
+    \pause
     \item Previous euristic approaches only consider a subset of all strategies \pause
-    \item Game Theory provides a framework appropritate for a comprehensive analysis of \emph{strategic argumentation}\pause
-    \item Can be used to achieve two goals:\pause
-        \begin{itemize}
-            \item predicting the outcome of a specific scenario\pause
-            \item Designing a protocol such that a set of known agents behave
-                in a desireable way (called \textbf{mechanism design})\pause
-        \end{itemize}
+    \item Game Theory provides a framework appropritate for a comprehensive analysis of \emph{strategic argumentation}. It can be used for:\pause
+    \begin{itemize}
+        \item Predicting the outcome of a specific scenario\pause
+        \item Designing a protocol such that a set of known agents behave
+            in a desireable way (called \textbf{mechanism design})
+    \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Glazer & Rubenstein's Model}
+\begin{frame}{Glazer \& Rubenstein's Model}
 \begin{itemize}
-    \item one of the first attempts of analyzing argumentation based on game theory
-    \item \emph{procedural rules} (order and type of arguments) and \emph{persuation rules} (how the outcome is chosen / who wins the debate)
-    \item no correlation between the logical structure of the information presented and the choice of the outcome
+    \item One of the first attempts of analyzing argumentation based on game theory
+    \item \emph{Procedural rules} (order and type of arguments) and \emph{persuation rules} (how the outcome is chosen / who wins the debate)
+    \item No correlation between the logical structure of the information presented and the choice of the outcome
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Game Theory Concepts}
 \begin{itemize}
+    \pause
     \item $I$ is the set of self-interested agents\pause
     \item $\theta_i \in \Theta$ is the type of agent $i$\pause
     \item $o \in \mathcal{O}$ is an outcome\pause
@@ -301,14 +306,119 @@
     \item $s=(s_1(\theta_1),\dots,s_I(\theta_I)) \in \mathcal{O}$ is a \emph{strategy profile}\pause
     \item for convenience:
         $s_{-i}(\theta_{-i}) = (s_1(\theta_1),\dots,s_{i-1}(\theta_{i-1}), s_{i+1}(\theta_{i+1}),\dots,s_I(\theta_I))$
-        $\theta_{-i}=(\theta_1,\dots,\theta_{i-1},\theta_{i+1},\dots,\theta_I)$\pause
+        $\theta_{-i}=(\theta_1,\dots,\theta_{i-1},\theta_{i+1},\dots,\theta_I)$
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Solution Concepts}
+    \pause
+    Let $s^*=(s_1^*,\dots,s_I^*)$ be a \emph{strategic profile}. Formally,
+    $s^*$ is a \emph{Nash equilibrium} if the following holds:
+    $$\forall i, \forall s_i^{'} \in \Sigma_i, u_i((s_i^*, s_{-i}^*), \theta_i)
+    \geq u_i((s_i^{'},s_{-i}^*), \theta_i).$$\pause
+    Informally, $s^*$ is a \emph{Nash equilibrium} if no agent 
+    would be better off utility-wise by changing its strategy, 
+    given that neither of the other agents changes its strategy.\pause
+
+    \vspace{5mm}
+    Problems: \pause
+    \begin{itemize}
+        \item Can be multple Nash equilibria\pause
+        \item Perfect knowledge of agent types is assumed
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Solution Concepts}
+    \pause
+    Formally, a strategy $s_i^* \in \Sigma_i$ is said to be \emph{dominant} if
+    $$\forall s_{-i}, \forall s_i^{'}, u_i((s_i^*, s_{-i}),\theta_i)
+    \ge u_i((s_i^{'}, s_{-i}),\theta_i).$$\pause
+    Informally, $s_i^*$ is \emph{dominant} if agent $i$ maximizes
+    its utility, regardless of the strategies of the other agents.\pause
+
+    \vspace{5mm}
+
+    Compared to the \emph{Nash equilibrium}, it is more solid as no information
+    about other agents needs to be assumed.\\
+    \vspace{3mm}\pause
+    The downside is that there will
+    be numerous settings where a dominant strategy cannot be found even for
+    one agent.
+\end{frame}
+
+\begin{frame}{Mechanism Design}
+    \pause
+
+    The problem studied by mechanism design is that of achieving a desired
+    outcome when dealing with a group of self-interested agents.\pause
+    \vspace{5mm}
+
+    A social choice function is defined as $f:\Theta_1 \times \dots \times \Theta_I \rightarrow \mathcal{O}$, s.t $f(\theta) \in \mathcal{O}$ and $\theta=(\theta_1,\dots,\theta_I)$.
+    Informally, a social choice function matches agent types to outcomes.\pause
+
+    \vspace{5mm}
+
+    The probleme with it that it is based on private information of the agents
+    (type). Agents cannot be trusted to be truthful.
+\end{frame}
+
+\begin{frame}{Mechanism Design}
 \begin{itemize}
-    \item
+    \pause
+    \item $\Sigma=\Sigma_1 \times \dots \times \Sigma_I$ is a restricted set of strategies that agents can choose from \pause
+    \item $\Sigma_i$ is the set of strategies that agent $i$ choosing from\pause
+    \item $g:\Sigma\rightarrow\mathcal{O}$ is a function that matches strategy
+        profiles to outcomes\pause
+    \item $\mathcal{M}=(\Sigma,g(\cdot))$ is called a mechanism.\pause
 \end{itemize}
+
+A mechanism is said to define a game where the strategy choices
+of the agents are limited to $\Sigma$. To maximize its utility,
+agent $i$ can only choose strategies from $\Sigma_i$.
+
+\end{frame}
+
+\begin{frame}{Mechanism Design}
+    \pause
+    $\mathcal{M}=(\Sigma, g(\cdot))$ is a mechanism
+    that implements the social function $f$, if there exists $s^*$ an
+    equilibrium s.t. $\forall \theta\in\Theta$, $g(s^*(\theta))=f(\theta)$.\pause 
+    \vspace{3mm}
+    Informally, a mechanism \emph{implements} a social choice function $f$ if
+    the outcome induced by the mechanism is the same as the outcome returned by
+    the function applied on the true types of the agents.
+
+\end{frame}
+
+\begin{frame}{Mechanism Design}
+
+    \pause
+    Formally, a mechanism is direct-revealing if $\forall i,
+    \Sigma_i=\Theta_i$, and $\forall \theta \in \Theta, g(\theta)=f(\theta)$.
+    Informally, the strategies of all agents are to announce a type
+    $\theta_i^{'}$ to the \emph{mechanism}.\pause
+
+    \vspace{5mm}
+
+    It is said that a social function
+    $f(\cdot)$ is \emph{incentive compatible} if it can be \emph{implemented}
+    by a direct mechanism $\mathcal{M}$ where all agents reveal their true type.
+\end{frame}
+
+\begin{frame}{Revelation Principle}
+
+    \pause
+    The definition of the mechanism states that the search space for strategies
+    is infinite.\pause
+    \vspace{5mm}
+
+    The \emph{Revelation Principle} helps limit the search-space and states that:\\
+    \pause
+    \vspace{3mm}
+    \emph{If there exists some mechanism that implements social choice
+    function f in dominant strategies, then there exists a direct-revealing
+    mechanism that implements f in dominant strategies and is truthful.}
+
 \end{frame}
 
 \section{Costin}
